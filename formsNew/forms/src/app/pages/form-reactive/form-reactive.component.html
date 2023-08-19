@@ -1,1 +1,112 @@
-<p>form-reactive works!</p>
+<h4>Formularios <small> tipo Reactive</small></h4>
+<hr>
+<form [formGroup]="form" (ngSubmit)="onSave()">
+
+  <div>
+
+    <div class="form-group row pt-2">
+      <label class="col-2 col-form-label">*Nombre</label>
+      <div class="col-10">
+
+        <input class="form-control" type="text" formControlName="name" placeholder="Nombre"
+          [class.is-invalid]="nameInvalid"
+          [class.is-valid]="form.get('name')!.valid">
+        <span *ngIf="nameInvalid" class="text-danger" style="font-size: 12px;">Ingrese al menos 5 caracteres</span>
+      </div>
+    </div>
+
+    <div class="form-group row pt-2">
+      <label class="col-2 col-form-label">*Apellido</label>
+      <div class="col-10">
+
+        <input class="form-control" type="text" placeholder="Apellido" formControlName="lastname"
+          [class.is-invalid]="lastNameInvalid">
+        <span *ngIf="lastNameInvalid" class="text-danger" style="font-size: 12px;">Ingrese al menos 5 caracteres</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row pt-2">
+    <label class="col-2 col-form-label">*Correo</label>
+    <div class="col-10">
+
+      <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email"
+        [class.is-invalid]="emailInvalid">
+        <span *ngIf="emailInvalid" class="text-danger" style="font-size: 12px;">Campo obligatorio</span>
+    </div>
+  </div>
+  <div class="form-group row pt-2" formGroupName="address">
+    <label class="col-2 col-form-label">Dirección</label>
+    <div class="col-5">
+      <input class="form-control" type="text" placeholder="Calle" formControlName="street"
+        [class.is-invalid]="streetInvalid">
+        <span *ngIf="streetInvalid" class="text-danger" style="font-size: 12px;">Campo obligatorio</span>
+    </div>
+    <div class="col-5">
+      <input class="form-control" type="text" placeholder="Numeración" formControlName="number"
+        [class.is-invalid]="false">
+        <!-- <span *ngIf="emailInvalid" class="text-danger" style="font-size: 12px;">Campo obligatorio</span> -->
+    </div>
+  </div>
+
+  <div class="form-group row pt-2">
+    <label class="col-2 col-form-label">*Ley/Ordenanza</label>
+    <div class="col-5">
+      <input class="form-control" type="text" placeholder="Ley/Ordenanza" formControlName="law"
+        [class.is-invalid]="lawInvalid">
+        <span *ngIf="lawInvalid" class="text-danger" style="font-size: 12px;">Campo obligatorio</span>
+    </div>
+  </div>
+  <div class="form-group row pt-2">
+    <div class="col">
+      <table>
+        <thead>
+          <tr>
+            <th>Articulos asociados</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody formArrayName="articles">
+          <tr *ngFor="let item of articlesArray.controls; let i = index">
+            <td>{{i}}</td>
+            <td>
+              <input class="form-control" [formControlName]="i" type="text" placeholder="Escribe un artículo">
+            </td>
+            <td>
+              <button type="button" (click)="deleteArticle()" class="btn btn-danger btn-sm">Borrar</button>
+            </td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-primary" (click)="addArticle()" style="cursor: pointer;"> + Agregar un articulo</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button (click)="addLaw()" type="button" class="btn btn-success">+ Agregar Ley</button>
+
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary btn-block" style="width: 100%;">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<hr>
+<pre>
+  Formulario válido: {{ form.valid }}
+  <br>
+  Status: {{ form.status }}
+</pre>
+<pre>
+  {{form.value | json}}
+</pre>

@@ -5,7 +5,8 @@ import { FormReactiveComponent } from './pages/form-reactive/form-reactive.compo
 
 const routes: Routes = [
   {path: 'form-template', component: FormTemplateComponent},
-  {path: 'form-reative', component: FormReactiveComponent}
+  {path: 'form-reactive', component: FormReactiveComponent},
+  {path:'**' , pathMatch: 'full', redirectTo: 'form-reactive'}
 ];
 
 @NgModule({

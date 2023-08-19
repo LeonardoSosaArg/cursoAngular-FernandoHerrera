@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormTemplateComponent } from './pages/form-template/form-template.component';
 import { FormReactiveComponent } from './pages/form-reactive/form-reactive.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
