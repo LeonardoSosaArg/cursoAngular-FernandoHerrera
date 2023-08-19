@@ -1,0 +1,174 @@
+<div class="mt-5">
+  <h4>Formularios <small> Tipo Reactive </small></h4>
+  <hr>
+  <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="guardar()">
+
+    <div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Nombre</label>
+        <div class="col">
+
+          <input class="form-control" 
+          type="text" 
+          placeholder="Nombre"
+          formControlName="nombre"
+          [class.is-invalid]="nombreNoValido">
+        <small *ngIf="nombreNoValido"
+      class="form-text text-danger">*Debe ingresar un nombre</small>
+      </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Apellido</label>
+        <div class="col">
+
+          <input class="form-control" 
+                type="text" 
+                placeholder="Apellido"
+                formControlName="apellido"
+                [class.is-invalid]="apellidoNoValido">
+      <small *ngIf="apellidoNoValido"
+      class="form-text text-danger">*Debe ingresar un apellido</small>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Correo</label>
+      <div class="col">
+
+        <input class="form-control" 
+               type="email" 
+              placeholder="Correo electrónico"
+              formControlName="correo"
+              [class.is-invalid]="correoNoValido">
+      <small *ngIf="correoNoValido"
+      class="form-text text-danger">*Debe ingresar un correo válido</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre Usuario</label>
+      <div class="col">
+
+        <input class="form-control" 
+               type="text" 
+              placeholder="Usuario"
+              formControlName="nombreUsuario"
+              [class.is-invalid]="usuarioNoValido">
+      <small *ngIf="usuarioNoValido"
+      class="form-text text-danger">*Ese nombre de usuario ya fue registrado.</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Contraseña</label>
+      <div class="col">
+
+        <input class="form-control" 
+               type="password" 
+              placeholder="Contraseña"
+              formControlName="password1"
+              [class.is-invalid] = "password1NoValido"
+              required>
+      <small *ngIf="password1NoValido"
+      class="form-text text-danger">*Debe ingresar una contraseña</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Repita Contraseña</label>
+      <div class="col">
+
+        <input class="form-control" 
+               type="password" 
+              placeholder="Repita Contraseña"
+              formControlName="password2"
+              [class.is-invalid] = "password2NoValido"
+              required>
+      <small *ngIf="password2NoValido"
+      class="form-text text-danger">*La contraseña no coincide con la primera</small>
+      </div>
+    </div>
+
+    <!-- EL DIV QUE CONTIENE LOS CAMPOS DE DISTRITO Y CIUDAD ES NUESTRO FORM GROUP DIRECCION(OBJETO) -->
+    <div class="form-group row" formGroupName="direccion">
+      <label class="col-2 col-form-label">Dirección</label>
+      <div class="form-row col">
+        <div class="col">
+          <input type="text"
+                  class="form-control"
+                  placeholder="Distrito"
+                  formControlName="distrito"
+                  [class.is-invalid]="distritoNoValido">
+                  <small *ngIf="distritoNoValido"
+              class="form-text text-danger">*Debe ingresar un distrito</small>
+        </div>
+        <div class="col">
+          <input type="text"
+                  class="form-control"
+                  placeholder="Ciudad"
+                  formControlName="ciudad"
+                  [class.is-invalid]="ciudadNoValido">
+                  <small *ngIf="ciudadNoValido"
+                class="form-text text-danger">*Debe ingresar una ciudad</small>
+      </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Ciudad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usu of usuarios; let i = index">
+                <td>{{usu.nombre}}</td>
+                <td>{{usu.apellido}}</td>
+                <td>{{usu.correo}}</td>
+                <td>{{usu.direccion}}</td>
+                <td>{{usu.direccion.ciudad}}</td>
+                <td>
+                  <button class="btn btn-danger"
+                          type="button">Borrar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary mt-3 mb-5 btn-block"
+                  type="button">+ Agregar</button>
+
+        </div>
+      </div>
+
+    <div class="form-group row">
+      <!-- <label class="col-2 col-form-label">&nbsp;</label> -->
+      <div class="input-group col">
+        <button type="submit" class="btn btn-outline-primary btn-block">
+          Guardar
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<!-- LISTENERS PARA VER LOS CAMBIOS DEL FORMULARIO -->
+<hr>
+<pre>
+  Estado del formulario: {{formulario.valid}}
+  <br>
+  Status: {{formulario.status}}
+</pre>
+<hr>
+<pre>
+  {{formulario.value | json}}
+</pre>

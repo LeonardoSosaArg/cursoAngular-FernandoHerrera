@@ -1,0 +1,36 @@
+<div class="row mt-3">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Genero</th>
+            <th>País</th>
+            <th>Fecha Nacimiento</th>
+            <th>Nombre Usuario</th>
+            <th>Activo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usu of listaUsuarios; let i = index">
+            <td>{{usu.nombre}}</td>
+            <td>{{usu.edad}}</td>
+            <td>{{usu.genero}}</td>
+            <td>{{usu.pais}}</td>
+            <td>{{usu.fechaNacimiento | date:'dd/MM/yyyy'}}</td>
+            <td>{{usu.nombreUsuario}}</td>
+            <td>{{usu.activo}}</td>
+            <td>
+              <button class="btn btn-danger btn-sm"
+                      type="button">Borrar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary mt-3 mb-5 btn-block"
+              type="button" routerLink="formularioParcial">+ Agregar</button>
+
+    </div>
+  </div>

@@ -1,0 +1,22 @@
+<div class="container mt-3">
+  <h3>Componente Padre</h3>
+  <div class="mb-3 col-4">
+    <label for="" class="form-label">País</label>
+    <select [(ngModel)]="paisSeleccionado" class="form-control" id="">
+        <option selected value="0">Seleccione un País</option>
+        <option selected value="Argentina">Argentina</option>
+        <option selected value="Argentina">Brasil</option>
+        <option selected value="Argentina">Belgica</option>
+        <option *ngFor="let pais of paises" [ngValue]="pais">{{pais.nombre}}</option>
+      </select>
+      <!-- <span class="text-danger" *ngIf="!pais?.valid">*Debe Seleccionar un Área</span> -->
+      <hr>
+      <input class="form-control" type="text" (keyup)="pasarDatos(dataEntrante)" [(ngModel)]="dataEntrante">
+      <button class="btn btn-primary" (click)="pasarDatos(dataEntrante)" > Agregar </button>
+      
+  </div>
+  <hr>
+  <div>
+    <app-form-hijo></app-form-hijo>
+  </div>
+</div>

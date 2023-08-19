@@ -1,0 +1,7 @@
+<h5>Componente Hijo</h5>
+<div class="mb-3 col-4">
+    <!-- <input type="text" value=> -->
+    <h1 id="">{{(paisSeleccionado$ | async)?.nombre }}</h1>
+    <p [(ngModel)]="control" class="lead">{{dataEntrante$ | async}}</p>
+    <button class="btn btn-danger mt-3" (click)="eliminar()">Eliminar</button>
+  </div>

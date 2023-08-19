@@ -1,0 +1,142 @@
+<div class="mt-5">
+  <h4>Formularios <small> Repaso Parcial </small></h4>
+  <hr>
+  <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="guardar()">
+
+    <!--NOMBRE-->
+    <div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Nombre</label>
+        <div class="col-6">
+          <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre"
+            [class.is-invalid]="nombreNoValido">
+          <small *ngIf="nombreNoValido" class="form-text text-danger">*Debe ingresar un nombre</small>
+        </div>
+      </div>
+    </div>
+
+    <!--EDAD-->
+    <div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Edad</label>
+        <div class="col-6">
+          <input type="number" 
+          formControlName="edad" 
+          class="form-control" id="" 
+          placeholder="Edad"
+          [class.is-invalid]="edadNoValido"
+          [maxlength]="2">
+          <span class="text-danger" *ngIf="!edad?.valid && edadNoValido">*Campo Obligatorio</span>
+          <span class="text-danger" *ngIf="edad?.errors?.['minLength'] && edadNoValido"> *La edad no puede ser menor a 2 digitos</span>
+          <span class="text-danger" *ngIf="edad?.errors?.['maxLength'] && edadNoValido"> *La edad no puede ser mayor a 2 digitos</span>
+          <span class="text-danger" *ngIf="edad?.errors?.['min'] && edadNoValido"> *La edad no puede ser menor a 18 años</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Genero</label>
+        <div class="col-6">
+          <div class="form-check">
+            <input class="form-check-input" formControlName="sexo" type="radio" id="Masculino" value="Masculino"
+              checked>
+            <label class="form-check-label" for="">
+              Masculino
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" formControlName="sexo" type="radio" id="Femenino" value="Femenino">
+            <label class="form-check-label" for="">
+              Femenino
+            </label>
+          </div>
+          <!-- <span class="text-danger" *ngIf="sexoNoValido">*Debe seleccionar un Sexo</span> -->
+          <small *ngIf="sexoNoValido" class="form-text text-danger">*Debe selecionar un genero</small>
+        </div>
+      </div>
+    </div>
+
+
+    <!--PAIS-->
+    <div class="form-group row">
+      <label class="col-2 col-form-label">País</label>
+      <div class="col-6">
+        <select [(ngModel)]="paisSeleccionado" 
+        class="form-control" 
+        formControlName="paises"
+        [class.is-invalid]="paisNoValido">
+          <option selected value="0">{{optionDefault}}</option>
+          <option selected value="1">Argentina</option>
+          <option *ngFor="let pais of listapaises; let i = index" [ngValue]="pais">{{pais.nombre}}</option>
+        </select>
+        <small *ngIf="paisNoValido" class="form-text text-danger">*Debe seleccionar un país</small>
+      </div>
+    </div>
+
+    <!--FECHA NACIMIENTO-->
+    <div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Fecha Nacimiento</label>
+        <div class="col-6">
+          <input type="date" 
+          formControlName="fechaNacimiento" 
+          class="form-control" id=""
+          [class.is-invalid]="fechaNoValido">
+          <small *ngIf="fechaNoValido" class="form-text text-danger">*Debe Ingresar una Fecha de Nacimiento</small>
+        </div>
+      </div>
+    </div>
+
+
+    <!--NOMBRE USUARIO-->
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre Usuario</label>
+      <div class="col-6">
+        <input class="form-control" type="text" placeholder="Usuario" formControlName="nombreUsuario"
+          [class.is-invalid]="usuarioNoValido">
+        <small *ngIf="usuarioNoValido" class="form-text text-danger">*Ese nombre de usuario ya fue registrado.</small>
+      </div>
+    </div>
+
+    <!--ACTIVO-->
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Activo</label>
+      <div class="col">
+        <div class="form-check inline">
+            <input class="form-check-input position-static" 
+            type="checkbox" 
+            value="option1"
+            formControlName="activo">
+          </div>
+        <!-- <small *ngIf="usuarioNoValido" class="form-text text-danger">*Ese nombre de usuario ya fue registrado.</small> -->
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group row">
+      <!-- <label class="col-2 col-form-label">&nbsp;</label> -->
+      <div class="input-group col">
+        <button [disabled]="!formulario.valid" [class.btn-warning]="!formulario.valid"
+        (click)="guardar()" class="btn btn-primary btn-block">
+        <span *ngIf="formulario.pending" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span *ngIf="formulario.pending" class="sr-only">Loading...</span>
+          Guardar  
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<!-- LISTENERS PARA VER LOS CAMBIOS DEL FORMULARIO -->
+<hr>
+<pre>
+    Estado del formulario: {{formulario.valid}}
+    <br>
+    Status: {{formulario.status}}
+  </pre>
+<hr>
+<pre>
+    {{formulario.value | json}}
+  </pre>
