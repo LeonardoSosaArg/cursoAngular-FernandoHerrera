@@ -50,6 +50,20 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary btn-block" style="width: 100%;">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
+  <hr>
+<!-- FORMULARIO LEYES -->
+  <form [formGroup]="formLaws" (ngSubmit)="onSaveLaws()" *ngFor="let item of formulariosLaws; let i = index">
   <div class="form-group row pt-2">
     <label class="col-2 col-form-label">*Ley/Ordenanza</label>
     <div class="col-5">
@@ -75,7 +89,7 @@
               <input class="form-control" [formControlName]="i" type="text" placeholder="Escribe un artículo">
             </td>
             <td>
-              <button type="button" (click)="deleteArticle()" class="btn btn-danger btn-sm">Borrar</button>
+              <button type="button" (click)="deleteArticle(i)" class="btn btn-danger btn-sm">Borrar</button>
             </td>
           </tr>
           <tr>
@@ -88,18 +102,30 @@
 
   <button (click)="addLaw()" type="button" class="btn btn-success">+ Agregar Ley</button>
 
-
-
-  <div class="form-group row">
-    <label class="col-2 col-form-label">&nbsp;</label>
-    <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary btn-block" style="width: 100%;">
-        Guardar
-      </button>
-    </div>
-  </div>
+  <hr>
+  <button type="submit" class="btn btn-primary"> Save </button>
 
 </form>
+
+<hr>
+<pre>
+  Formulario LAWS válido: {{ formLaws.valid }}
+  <br>
+  Status: {{ formLaws.status }}
+</pre>
+<pre>
+  {{formLaws.value | json}}
+</pre>
+
+<hr>
+<pre>
+  FORMULARIOS LAWS {{ formulariosLaws }}
+</pre>
+<pre>
+  {{formulariosLaws.values | json}}
+</pre>
+
+
 
 <hr>
 <pre>

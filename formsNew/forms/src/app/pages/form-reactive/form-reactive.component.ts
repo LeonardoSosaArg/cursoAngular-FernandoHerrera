@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ValidatorsService } from './services/validators.service';
 
 @Component({
   selector: 'app-form-reactive',
@@ -14,12 +15,18 @@ import {
 })
 export class FormReactiveComponent implements OnInit {
   fb = inject(FormBuilder);
+  validatorService = inject(ValidatorsService);
   form: FormGroup;
   isEdit: boolean = false;
+  formLaws: FormGroup;
+  formulariosLaws: FormGroup[] = [];
 
   constructor() {
     this.createForm();
     this.loadObjectToEdit();
+    this.createFormLaws();
+    //EJEMPLO PARA CARGAR DATOS EN LOS FORMS ARRAYS
+    //['lEY 1234', 'Ley 4545'].forEach( valor => this.articlesArray.push( this.fb.control(valor)));
   }
 
   ngOnInit(): void {}
@@ -46,6 +53,20 @@ export class FormReactiveComponent implements OnInit {
         []
       ]),
     });
+  }
+
+  createFormLaws(){
+    this.formLaws = this.fb.group({
+      law: ['', [Validators.required]],
+      articles: this.fb.array([
+        []
+      ]),
+    })
+    this.formulariosLaws.push(this.formLaws);
+  }
+
+  onSaveLaws(){
+    console.log(this.formLaws);
   }
 
   loadObjectToEdit() {
@@ -82,17 +103,28 @@ export class FormReactiveComponent implements OnInit {
     this.form.reset();
   }
 
-  deleteArticle() {}
+  deleteArticle(index: number) {
+    this.articlesArray.removeAt(index);
+  }
 
-  addArticle() {}
+  addArticle() {
+    this.articlesArray.push( this.fb.control('', [Validators.required]));
+  }
 
   addLaw(){
-
+    this.formulariosLaws.push(
+      this.fb.group({
+        law: ['', [Validators.required]],
+        articles: this.fb.array([
+          []
+        ]),
+      })
+    )
   }
 
   //GET DEL FORM ARRAY
   get articlesArray() {
-    return this.form.get('articles') as FormArray;
+    return this.formLaws.get('articles') as FormArray;
   }
 
   get lawInvalid() {
