@@ -7,13 +7,15 @@ import { FormTemplateComponent } from './pages/form-template/form-template.compo
 import { FormReactiveComponent } from './pages/form-reactive/form-reactive.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormModificableComponent } from './pages/form-modificable/form-modificable.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormTemplateComponent,
     FormReactiveComponent,
-    NavBarComponent
+    NavBarComponent,
+    FormModificableComponent
   ],
   imports: [
     BrowserModule,

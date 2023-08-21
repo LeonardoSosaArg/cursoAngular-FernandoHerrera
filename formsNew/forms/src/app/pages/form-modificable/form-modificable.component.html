@@ -1,0 +1,62 @@
+<!-- FORMULARIO LEYES -->
+<form [formGroup]="item" (ngSubmit)="onSaveLaws()" *ngFor="let item of formOrdenanzas; let i = index">
+  <div class="form-group row pt-2">
+    <label class="col-2 col-form-label">*Ley/Ordenanza</label>
+    <div class="col-5">
+      <input class="form-control" type="text" placeholder="Ley/Ordenanza" formControlName="law"
+        [class.is-invalid]="lawInvalid(i)">
+        <span *ngIf="lawInvalid(i)" class="text-danger" style="font-size: 12px;">Campo obligatorio</span>
+    </div>
+  </div>
+  <div class="form-group row pt-2">
+    <div class="col">
+      <table>
+        <thead>
+          <tr>
+            <th>Articulos asociados</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody formArrayName="articles" >
+          <tr [formGroupName]="j" *ngFor="let item of articulosArray(i).controls; let j = index">
+            <td [attr.for]="'description'">{{j}}</td>
+            <td>
+              <input class="form-control" formControlName="description"  type="text" placeholder="Escribe un artículo">
+            </td>
+            <td>
+              <button type="button" (click)="deleteArticulo(i,j)" class="btn btn-danger btn-sm">Borrar</button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><button type="button" class="btn btn-primary" (click)="addArticulo(i)" style="cursor: pointer;"> + Agregar un articulo</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+<button (click)="addLey()" type="button" class="btn btn-success">+ Agregar Ley</button>
+
+<hr>
+<button type="submit" (click)="onSaveLaws()" class="btn btn-primary"> Save </button>
+
+<!-- <hr>
+<pre>
+  Formulario LAWS válido: {{ formLaw.valid }}
+  <br>
+  Status: {{ formLaw.status }}
+</pre>
+<pre>
+  {{formLaw.value | json}}
+</pre> -->
+
+<hr>
+<pre>
+  FORMULARIOS LAWS {{ formulariosLaws }}
+</pre>
+<pre>
+  {{formulariosLaws.values | json}}
+</pre>
